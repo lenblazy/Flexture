@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Flexture</string>
+
+    <string-array name="roles">
+        <item>Student</item>
+        <item>Lecturer</item>
+    </string-array>
+
+</resources>

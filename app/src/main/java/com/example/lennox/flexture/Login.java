@@ -135,12 +135,14 @@ public class Login extends AppCompatActivity {
 
         @Override
         public void afterTextChanged(Editable editable) {
+            String un = et_userName.getText().toString().trim();
+            String pwd = et_Password.getText().toString().trim();
 
+            if (un != null && pwd != null)
+                loginButton.setEnabled(true);
         }
     };
     // not completed yet
-
-
 
     private void init() {
         roleSpinner = (Spinner) findViewById(R.id.role_selector);

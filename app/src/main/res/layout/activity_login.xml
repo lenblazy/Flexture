@@ -99,6 +99,7 @@
             android:focusable="true"
             android:clickable="true"
             android:text="Create new account"
+            android:textColor="#e7e7e7"
             android:textSize="15sp" />
 
     </LinearLayout>
@@ -118,6 +119,7 @@
             android:focusable="true"
             android:clickable="true"
             android:text="Forgot Password?"
+            android:textColor="#e7e7e7"
             android:textSize="13sp" />
 
     </RelativeLayout>

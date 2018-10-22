@@ -9,6 +9,11 @@
     </style>
     <!-- Create a new style here. -->
 
+    <style name="myStyle" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
     <style name="input">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>

@@ -6,7 +6,7 @@
 
         <item
             android:id="@+id/profile"
-            android:orderInCategory="100"
+            android:orderInCategory="1"
             app:showAsAction="never"
             app:actionViewClass="1"
             android:title="Profile" />

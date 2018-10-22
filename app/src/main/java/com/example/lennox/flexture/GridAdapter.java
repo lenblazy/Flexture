@@ -2,6 +2,7 @@ package com.example.lennox.flexture;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -109,7 +110,8 @@ public class GridAdapter extends BaseAdapter{
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   //to do stuff
+                   Intent profile = new Intent(activity, Profile.class);
+                    activity.startActivity(profile);
                 }
             });
             Animation anim = new ScaleAnimation(

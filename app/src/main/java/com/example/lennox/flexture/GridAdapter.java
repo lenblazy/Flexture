@@ -17,10 +17,12 @@ import java.util.ArrayList;
 public class GridAdapter extends BaseAdapter{
     ArrayList names;
     public static Activity activity;
+    private Boolean studentSelected;
 
-    public GridAdapter(Activity activity, ArrayList names) {
+    public GridAdapter(Activity activity, ArrayList names, Boolean role) {
         this.activity = activity;
         this.names = names;
+        studentSelected = role;
     }
 
     @Override
@@ -52,6 +54,9 @@ public class GridAdapter extends BaseAdapter{
                 @Override
                 public void onClick(View v) {
                     //add actions
+                    Intent classSession = new Intent(activity, ClassSession.class);
+                    classSession.putExtra("ROLE", studentSelected);
+                    activity.startActivity(classSession);
                 }
             });
             Animation anim = new ScaleAnimation(

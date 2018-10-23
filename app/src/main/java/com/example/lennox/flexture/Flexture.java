@@ -45,7 +45,7 @@ public class Flexture extends AppCompatActivity {
         }
 
         gridview = findViewById(R.id.grid);
-        adapter = new GridAdapter(this, fields);
+        adapter = new GridAdapter(this, fields, role);
         gridview.setAdapter(adapter);
     }
 

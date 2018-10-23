@@ -12,7 +12,6 @@
         <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -22,8 +21,15 @@
             android:theme="@style/myStyle" />
         <activity
             android:name=".Profile"
+            android:theme="@style/myStyle"
+            android:parentActivityName=".Flexture" />
+        <activity android:name=".About"
+            android:parentActivityName=".Flexture"
             android:theme="@style/myStyle" />
-        <activity android:name=".About"></activity>
+        <activity android:name=".ClassSession"
+            android:label="Class Session"
+            android:parentActivityName=".Flexture"
+            android:theme="@style/myStyle" ></activity>
     </application>
 
 </manifest>

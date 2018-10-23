@@ -90,8 +90,7 @@ public class Login extends AppCompatActivity {
                 }
 
                 if (studentSelected == false) {
-                    boolean pass;
-                    pass = validateLecturer(userName, password);
+                    boolean pass = validateLecturer(userName, password);
 
                     if (pass == true) {
                         mainPageIntent.putExtra("ROLE", studentSelected);
@@ -108,10 +107,12 @@ public class Login extends AppCompatActivity {
     }
 
     private boolean validateLecturer(String userName, String password) {
+        //check for credentials first
         return true;
     }//incomplete
 
     private boolean validateStudent(String userName, String password) {
+        //check for credentials first
         return true;
     }//incomplete
 

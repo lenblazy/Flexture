@@ -5,11 +5,11 @@
     tools:context="com.example.lennox.flexture.Flexture">
 
         <item
-            android:id="@+id/profile"
+            android:id="@+id/settings"
             android:orderInCategory="1"
             app:showAsAction="never"
             app:actionViewClass="1"
-            android:title="Profile" />
+            android:title="Settings" />
         <item
             android:id="@+id/about"
             android:orderInCategory="2"

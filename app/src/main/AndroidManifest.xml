@@ -19,10 +19,11 @@
         <activity android:name=".Registration" />
         <activity
             android:name=".Flexture"
-            android:theme="@style/myStyle"></activity>
-        <activity android:name=".Profile"
-            android:theme="@style/myStyle"></activity>
-
+            android:theme="@style/myStyle" />
+        <activity
+            android:name=".Profile"
+            android:theme="@style/myStyle" />
+        <activity android:name=".About"></activity>
     </application>
 
 </manifest>

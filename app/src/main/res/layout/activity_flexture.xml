@@ -10,13 +10,12 @@
         android:id="@+id/topSpace"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="2.5"
         android:layout_alignParentTop="true"
         android:paddingBottom="5dp">
         <ImageView
             android:id="@+id/prof_pic"
-            android:layout_width="120sp"
-            android:layout_height="120sp"
+            android:layout_width="110sp"
+            android:layout_height="110sp"
             android:src="@drawable/ic_user"
             android:scaleType="centerCrop"
             android:layout_alignParentStart="true"/>
@@ -25,7 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/prof_pic"
-            android:textSize="30sp"
+            android:textSize="20sp"
+            android:paddingTop="10dp"
             android:text="Name"
             android:textColor="@android:color/black"
             android:layout_marginStart="10dp"/>
@@ -36,9 +36,7 @@
             android:layout_toRightOf="@id/prof_pic"
             android:layout_below="@id/user_name"
             android:layout_marginBottom="5dp"
-            android:text="Blah blah blah blah blah
-Blah blah blah blah blah
-Blah blah blah blah blah"
+            android:text="Welcome to flexture..."
             android:textSize="15sp"
             android:layout_marginStart="10dp"/>
     </RelativeLayout>

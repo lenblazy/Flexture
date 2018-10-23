@@ -82,6 +82,5 @@ public class Flexture extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
 
-
     }
 }

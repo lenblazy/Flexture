@@ -37,7 +37,7 @@
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:gravity="center"
-        android:text="1. Lennox Brown Mwabonje"
+        android:text="@string/author1"
         android:layout_marginBottom="5dp"
         android:layout_above="@id/author2"
         android:layout_alignParentStart="true" />
@@ -49,7 +49,7 @@
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:gravity="center"
-        android:text="2. Emmanuel Saha Mwinga"
+        android:text="@string/author2"
         android:layout_alignParentBottom="true" />
 
     <ImageView

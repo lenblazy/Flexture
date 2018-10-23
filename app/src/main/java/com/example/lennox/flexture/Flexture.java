@@ -38,30 +38,31 @@ public class Flexture extends AppCompatActivity {
         Boolean role = getIntent().getBooleanExtra("ROLE", true);
 
         //true value for students and false value for lecturers
-        if (role == true) {
+        if (role) {
             studentActivities();
         } else {
             lecturerActivities();
         }
 
-        gridview = (GridView) findViewById(R.id.grid);
+        gridview = findViewById(R.id.grid);
         adapter = new GridAdapter(this, fields);
         gridview.setAdapter(adapter);
     }
 
     private void lecturerActivities() {
-        fields.add("ATTENDANCE");
+        fields.add("CLASS SESSION");
         fields.add("SCHEDULER");
         fields.add("NOTES");
-        fields.add("CGPA CALCULATOR");
+        fields.add("PROFILE");
+        fields.add("RESULTS");
     }
 
     private void studentActivities() {
-        fields.add("ATTENDANCE");
-        //fields.add("TIME TABLE");
+        fields.add("CLASS SESSION");
+        fields.add("TIME TABLE");
         fields.add("NOTES");
-        fields.add("CGPA CALCULATOR");
         fields.add("PROFILE");
+        fields.add("RESULTS");
     }
 
     @Override

@@ -46,7 +46,7 @@ public class GridAdapter extends BaseAdapter{
         }
         TextView textView = (TextView)view.findViewById(R.id.namePlacer);
         ImageView imageView = (ImageView)view.findViewById(R.id.imageHolder);
-        if(names.get(i).toString().equals("ATTENDANCE")) {
+        if(names.get(i).toString().equals("CLASS SESSION")) {
             imageView.setImageResource(R.drawable.ic_attendance);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -65,6 +65,26 @@ public class GridAdapter extends BaseAdapter{
             anim.setRepeatCount(Animation.INFINITE);
             imageView.startAnimation(anim);
         }else if(names.get(i).toString().equals("SCHEDULER"))
+        {
+            imageView.setImageResource(R.drawable.ic_schedule);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //to do stuff
+                }
+            });
+            Animation anim = new ScaleAnimation(
+                    0.95f, 1f, // Start and end values for the X axis scaling
+                    0.95f, 1f, // Start and end values for the Y axis scaling
+                    Animation.RELATIVE_TO_SELF, 0.5f, // Pivot point of X scaling
+                    Animation.RELATIVE_TO_SELF, 0.5f); // Pivot point of Y scaling
+            anim.setFillAfter(true); // Needed to keep the result of the animation
+            anim.setDuration(2000);
+            anim.setRepeatMode(Animation.INFINITE);
+            anim.setRepeatCount(Animation.INFINITE);
+            imageView.startAnimation(anim);
+
+        }else if(names.get(i).toString().equals("TIME TABLE"))
         {
             imageView.setImageResource(R.drawable.ic_schedule);
             view.setOnClickListener(new View.OnClickListener() {
@@ -125,7 +145,7 @@ public class GridAdapter extends BaseAdapter{
             anim.setRepeatCount(Animation.INFINITE);
             imageView.startAnimation(anim);
         }
-        else if(names.get(i).toString().equals("CGPA CALCULATOR"))
+        else if(names.get(i).toString().equals("RESULTS"))
         {
             imageView.setImageResource(R.drawable.ic_cgpa);
             view.setOnClickListener(new View.OnClickListener() {

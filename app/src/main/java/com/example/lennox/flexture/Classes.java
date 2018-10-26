@@ -7,6 +7,14 @@ public class Classes {
 
     public Classes(){}
 
+    public int getID(){
+        return _id;
+    }
+
+    public void setID(int _id) {
+        this._id = _id;
+    }
+
     public String getCode() {
         return code;
     }

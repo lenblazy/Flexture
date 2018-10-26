@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "585649324530",
+    "firebase_url": "https://flexture-522d8.firebaseio.com",
+    "project_id": "flexture-522d8",
+    "storage_bucket": "flexture-522d8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:585649324530:android:9ee23274eb6421e3",
+        "android_client_info": {
+          "package_name": "com.example.lennox.flexture"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "585649324530-obct8bpfhf6p1ma4n7pt09kgvj3o2nd8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lennox.flexture",
+            "certificate_hash": "5a235e155dd0f59dfb24a8b7211f2c063a13dda6"
+          }
+        },
+        {
+          "client_id": "585649324530-klu6p3lh6c6tqrcn80na0od8h6vt3ve6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYTTlbILr5QS5PF30SigOnQb8q-g52734"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "585649324530-klu6p3lh6c6tqrcn80na0od8h6vt3ve6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

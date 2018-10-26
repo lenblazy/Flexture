@@ -7,7 +7,7 @@
     <TableLayout
         android:id="@+id/title_classes"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:stretchColumns="*">
 
         <TableRow android:layout_width="match_parent"
@@ -17,6 +17,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="@android:color/white"
+                android:textSize="20sp"
                 android:text="Code" />
 
             <TextView
@@ -24,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="@android:color/white"
+                android:textSize="20sp"
                 android:text="Title" />
 
             <TextView
@@ -31,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="@android:color/white"
+                android:textSize="20sp"
                 android:text="Venue" />
 
             <TextView
@@ -38,6 +41,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="@android:color/white"
+                android:textSize="20sp"
                 android:text="Date" />
 
             <TextView
@@ -45,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="@android:color/white"
+                android:textSize="20sp"
                 android:text="Time" />
 
         </TableRow>

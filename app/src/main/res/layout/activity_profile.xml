@@ -112,6 +112,7 @@
                     />
 
                 <Spinner
+                    android:id="@+id/sp_faculty"
                     android:layout_marginStart="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"></Spinner>
@@ -131,6 +132,7 @@
                     />
 
                 <Spinner
+                    android:id="@+id/sp_dept"
                     android:layout_marginStart="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"></Spinner>
@@ -150,6 +152,7 @@
                     />
 
                 <Spinner
+                    android:id="@+id/sp_level"
                     android:layout_marginStart="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"></Spinner>
@@ -169,6 +172,7 @@
                     />
 
                 <Spinner
+                    android:id="@+id/sp_prog"
                     android:layout_marginStart="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"></Spinner>
@@ -188,6 +192,7 @@
                     />
 
                 <Spinner
+                    android:id="@+id/sp_year"
                     android:layout_marginStart="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"></Spinner>
@@ -207,6 +212,7 @@
                     />
 
                 <Spinner
+                    android:id="@+id/sp_semester"
                     android:layout_marginStart="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"></Spinner>

@@ -15,7 +15,15 @@ import java.util.List;
 public class DBHandler extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 2;
-    private static final String DATABASE_NAME = "schedule.db";
+    private static final String DATABASE_NAME = "flexture.db";
+
+    /*
+    public static final String TABLE_UNITS = "units";
+    public static final String COLUMN_UNIT_ID = "id";
+    public static final String COLUMN_UNIT_CODE = "codes";
+    public static final String COLUMN_UNIT_TITLE = "titles";
+    public static final String COLUMN_UNIT_LECTURER = "lecturers"; */
+
     public static final String TABLE_SCHEDULE = "schedule";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_CODE = "code";
@@ -31,7 +39,11 @@ public class DBHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        String query = "CREATE TABLE " + TABLE_SCHEDULE + "(" +
+       // String createTableUnits = "CREATE TABLE " + TABLE_UNITS + " (id INTEGER PRIMARY KEY AUTOINCREMENT, codes TEXT )";
+
+      //  sqLiteDatabase.execSQL(createTableUnits);
+
+        String createTableSchedule = "create table " + TABLE_SCHEDULE + "(" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_CODE + " TEXT, " +
                 COLUMN_TITLE + " TEXT, " +
@@ -39,8 +51,9 @@ public class DBHandler extends SQLiteOpenHelper {
                 COLUMN_DATE + " TEXT, " +
                 COLUMN_TIME + " TEXT )";
 
-        sqLiteDatabase.execSQL(query);
+        sqLiteDatabase.execSQL(createTableSchedule);
 
+        /*
         //adding dummy data
         try {
             ////////////////////////////////////////////////////////////////////////
@@ -62,6 +75,7 @@ public class DBHandler extends SQLiteOpenHelper {
         } catch (Exception e) {
             Log.d("CS", "Error in DBHelper.onCreate() : " + e.getMessage());
         }
+        //////////////////////////////////////////////////////////////////////////////*/
     }
 
     @Override

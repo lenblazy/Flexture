@@ -33,9 +33,13 @@
             android:label="Class Session"
             android:parentActivityName=".Flexture"
             android:theme="@style/myStyle" />
-        <activity android:name=".Scheduler"
+        <activity
+            android:name=".Scheduler"
             android:parentActivityName=".Flexture"
-            android:theme="@style/myStyle"></activity>
+            android:theme="@style/myStyle" />
+        <activity android:name=".Notes"
+            android:parentActivityName=".Flexture"
+            android:theme="@style/myStyle" ></activity>
     </application>
 
 </manifest>

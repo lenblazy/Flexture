@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorSecondary">
+
+    <TextView
+        android:id="@+id/note_instruction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select a course:"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"/>
+
+    <Spinner
+        android:id="@+id/instr_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/note_instruction"
+        android:layout_margin="15dp"
+        ></Spinner>
+
+    <TextView
+        android:id="@+id/sub_instr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        android:text="Upload submission file: "
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:layout_marginStart="15dp"/>
+
+    <ImageButton
+        android:id="@+id/upload_file"
+        android:layout_width="25dp"
+        android:layout_height="20dp"
+        android:layout_alignBottom="@+id/sub_instr"
+        android:layout_toEndOf="@+id/sub_instr"
+        android:src="@drawable/ic_file" />
+
+    <TextView
+        android:id="@+id/course_students"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Number of Students : "
+        android:layout_below="@id/note_instruction"
+        android:layout_marginLeft="15dp"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"/>
+
+    <TextView
+        android:id="@+id/stud_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@android:color/holo_red_light"
+        android:text="0"
+        android:layout_toEndOf="@id/course_students"
+        android:layout_alignBaseline="@id/course_students"/>
+
+    <TextView
+        android:id="@+id/students_submissions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Students' submissions: "
+        android:layout_below="@id/course_students"
+        android:layout_marginLeft="15dp"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"/>
+
+    <TextView
+        android:id="@+id/files_submitted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@android:color/holo_red_light"
+        android:text="0"
+        android:layout_toEndOf="@id/students_submissions"
+        android:layout_alignBaseline="@id/students_submissions"/>
+
+    <TextView
+        android:id="@+id/list_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Notes posted:"
+        android:layout_below="@id/students_submissions"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"/>
+
+    <ListView
+        android:id="@+id/notes_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/list_title"
+        android:layout_above="@id/sub_instr"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
+
+    </ListView>
+
+</RelativeLayout>

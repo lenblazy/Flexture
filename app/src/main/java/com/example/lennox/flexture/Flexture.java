@@ -76,7 +76,11 @@ public class Flexture extends AppCompatActivity {
                 startActivity(about);
                 return true;
             case R.id.logout:
-                //logout user
+                //logout user from system, not yet complete
+                Intent logout = new Intent(this, Login.class);
+                finish();
+                logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); //prevents user from going back to previous screen
+                startActivity(logout);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

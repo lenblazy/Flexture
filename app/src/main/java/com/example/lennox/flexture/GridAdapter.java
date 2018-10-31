@@ -161,9 +161,9 @@ public class GridAdapter extends BaseAdapter{
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   // Intent results = new Intent(activity, Results.class);
-                   // results.putExtra("ROLE", studentSelected);
-                   // activity.startActivity(results);
+                    Intent results = new Intent(activity, Results.class);
+                    results.putExtra("ROLE", studentSelected);
+                    activity.startActivity(results);
                 }
             });
             Animation anim = new ScaleAnimation(

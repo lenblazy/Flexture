@@ -1,9 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorSecondary"
     tools:context=".Results">
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/sel_course"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:visibility="gone"
+        android:text="Select course: "/>
+
+    <Spinner
+        android:id="@+id/courses_taught"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/sel_course"
+        android:layout_alignParentEnd="true"
+        android:visibility="gone"
+        android:layout_marginEnd="121dp" />
+
+    <TextView
+        android:id="@+id/sel_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:layout_below="@id/sel_course"
+        android:layout_marginStart="10dp"
+        android:text="Select year: "/>
+
+    <Spinner
+        android:id="@+id/year_selector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/sel_year"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/sel_sem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:layout_below="@id/sel_year"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Select semester: "
+        />
+
+    <Spinner
+        android:id="@+id/sem_selector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/sel_sem"
+        android:layout_toEndOf="@+id/sel_sem" />
+
+    <TextView
+        android:id="@+id/results_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:layout_below="@id/sel_sem"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        android:text="Results"
+        />
+
+    <TableLayout
+        android:id="@+id/stud_results_table"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/results_title">
+
+    </TableLayout>
+    <!-- student's table -->
+
+    <TableLayout
+        android:id="@+id/lec_results_table"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/results_title"
+        android:visibility="gone">
+
+    </TableLayout>
+    <!-- lecturer's table -->
+
+    <Button
+        android:id="@+id/print_results"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="10dp"
+        android:text="Print"/>
+
+
+</RelativeLayout>

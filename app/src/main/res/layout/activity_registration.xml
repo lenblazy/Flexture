@@ -44,8 +44,7 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.8">
+                android:layout_height="wrap_content">
 
                 <EditText
                     android:id="@+id/first_name"
@@ -58,8 +57,7 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.8">
+                android:layout_height="wrap_content">
 
                 <EditText
                     android:id="@+id/last_name"
@@ -71,8 +69,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.9"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
@@ -92,20 +89,20 @@
             </LinearLayout>
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/reg_input"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.7">
+                android:layout_height="wrap_content">
 
                 <EditText
                     android:id="@+id/registration_number"
                     style="@style/input"
+                    android:hint="Registration number"
                     android:drawableLeft="@drawable/ic_role" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.6">
+                android:layout_height="wrap_content">
 
                 <EditText
                     android:id="@+id/email"
@@ -117,8 +114,7 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.7">
+                android:layout_height="wrap_content">
 
                 <EditText
                     android:id="@+id/phone_number"
@@ -130,8 +126,7 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.7">
+                android:layout_height="wrap_content">
 
                 <EditText
                     android:id="@+id/password_1"
@@ -144,8 +139,7 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.7">
+                android:layout_height="wrap_content">
 
                 <EditText
                     android:id="@+id/password_2"
@@ -161,7 +155,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.3">
+        android:layout_weight="1.2">
 
         <Button
             android:id="@+id/register_button"

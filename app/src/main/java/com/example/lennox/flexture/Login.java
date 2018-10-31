@@ -47,6 +47,9 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent regIntent = new Intent(Login.this, Registration.class);
+                finish();
+                regIntent.putExtra("ROLE", studentSelected);
+                regIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); //prevents user from going back to previous screen
                 startActivity(regIntent);
             }
         });
@@ -82,7 +85,9 @@ public class Login extends AppCompatActivity {
                     pass = validateStudent(userName, password);
 
                     if (pass == true) {
+                        finish();
                         mainPageIntent.putExtra("ROLE", studentSelected);
+                        mainPageIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); //prevents user from going back to previous screen
                         startActivity(mainPageIntent);
                     } else {
                         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_SHORT).show();
@@ -93,7 +98,9 @@ public class Login extends AppCompatActivity {
                     boolean pass = validateLecturer(userName, password);
 
                     if (pass == true) {
+                        finish();
                         mainPageIntent.putExtra("ROLE", studentSelected);
+                        mainPageIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); //prevents user from going back to previous screen
                         startActivity(mainPageIntent);
                     } else {
                         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_SHORT).show();

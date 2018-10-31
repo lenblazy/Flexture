@@ -1,6 +1,7 @@
 package com.example.lennox.flexture;
 
 import android.content.Intent;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -22,9 +23,10 @@ public class Registration extends AppCompatActivity {
     private Button submitRegistration;
     private EditText et_fName, et_lName, et_regNumber, et_mainPass, et_sidePass, et_emailAddr, et_fonNum;
     public String fName, lName, regNum, mainPwd, sidePwd, emailAddress, fonNumber;
-    private Boolean studentSelected = true;
+    private Boolean studentSelected;
     private Spinner regSpinner;
     private ArrayAdapter<CharSequence> adapter;
+    private TextInputLayout regInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +62,11 @@ public class Registration extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i) {
                     case 0:
-                        Toast.makeText(getBaseContext(), adapterView.getItemAtPosition(i) + " selected", Toast.LENGTH_SHORT).show();
+                        regInput.setVisibility(View.VISIBLE);
                         studentSelected = true;
-                        et_regNumber.setHint("Registration number");
                         break;
                     case 1:
-                        Toast.makeText(getBaseContext(), adapterView.getItemAtPosition(i) + " selected", Toast.LENGTH_SHORT).show();
-                        et_regNumber.setHint("PF number");
+                        regInput.setVisibility(View.GONE);
                         studentSelected = false;
                         break;
                 }
@@ -107,7 +107,8 @@ public class Registration extends AppCompatActivity {
     };
 
     private void register() {
-        Intent login = new Intent(Registration.this, Login.class);
+        Intent flexture = new Intent(Registration.this, Flexture.class);
+
         if (!validate()) {
             Toast.makeText(this, "Registration has failed", Toast.LENGTH_SHORT).show();
         }
@@ -116,8 +117,11 @@ public class Registration extends AppCompatActivity {
                 boolean regSuccess = true;
                 //save the reg details in firebase
                 if (regSuccess == true) {
-                    startActivity(login);
+                    finish();
                     Toast.makeText(getBaseContext(), " Successful registration", Toast.LENGTH_SHORT).show();
+                    flexture.putExtra("ROLE", studentSelected);
+                    flexture.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); //prevents user from going back to previous screen
+                    startActivity(flexture);
                 } else {
                     Toast.makeText(getBaseContext(), " Registration not successful, try again!", Toast.LENGTH_SHORT).show();
                 }
@@ -126,8 +130,11 @@ public class Registration extends AppCompatActivity {
                 boolean regSuccess = true;
                 //save the reg details in firebase
                 if (regSuccess == true) {
-                    startActivity(login);
+                    finish();
                     Toast.makeText(getBaseContext(), " Successful registration", Toast.LENGTH_SHORT).show();
+                    flexture.putExtra("ROLE", studentSelected);
+                    flexture.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); //prevents user from going back to previous screen
+                    startActivity(flexture);
                 } else {
                     Toast.makeText(getBaseContext(), " Registration not successful, try again!", Toast.LENGTH_SHORT).show();
                 }
@@ -137,6 +144,7 @@ public class Registration extends AppCompatActivity {
 
     private boolean validate() {
         boolean valid = true;
+
         if (fName.isEmpty() || fName.length() > 30 || checkName(fName)) {
             et_fName.setError("Invalid name");
             valid = false;
@@ -145,13 +153,7 @@ public class Registration extends AppCompatActivity {
             et_lName.setError("Invalid name");
             valid = false;
         }
-        if (studentSelected == false) {
-            if (regNum.isEmpty()) {
-                et_regNumber.setError("Invalid pf number");
-                valid = false;
-            }
-        } else if (studentSelected == true) {
-            //1st check whether it is a lecturer registering or a student
+        if (studentSelected == true) {
             if (regNum.isEmpty() || checkReg(regNum)) {
                 et_regNumber.setError("Invalid registration number");
                 valid = false;
@@ -213,5 +215,12 @@ public class Registration extends AppCompatActivity {
         et_fonNum = (EditText) findViewById(R.id.phone_number);
         submitRegistration = (Button) findViewById(R.id.register_button);
         regSpinner = (Spinner) findViewById(R.id.reg_selector);
+        regInput = findViewById(R.id.reg_input);
+        Boolean studentSelected = getIntent().getBooleanExtra("ROLE", true);
+        if (studentSelected) {
+            //set the selected text to be student
+        } else {
+            //set default value to be lecturer
+        }
     }
 }

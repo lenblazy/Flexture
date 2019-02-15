@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 
 public class Flexture extends AppCompatActivity {
@@ -16,6 +18,7 @@ public class Flexture extends AppCompatActivity {
     GridView gridview;
     GridAdapter adapter;
     public static Activity activity;
+    private FirebaseAuth mAuth;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -33,6 +36,7 @@ public class Flexture extends AppCompatActivity {
     private void init() {
         activity = this;
         fields = new ArrayList<>();
+        mAuth = FirebaseAuth.getInstance();
 
         //check the role
         Boolean role = getIntent().getBooleanExtra("ROLE", true);
@@ -76,10 +80,9 @@ public class Flexture extends AppCompatActivity {
                 startActivity(about);
                 return true;
             case R.id.logout:
-                //logout user from system, not yet complete
                 Intent logout = new Intent(this, Login.class);
+                mAuth.signOut();
                 finish();
-                logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); //prevents user from going back to previous screen
                 startActivity(logout);
                 return true;
             default:

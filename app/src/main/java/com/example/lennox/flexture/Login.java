@@ -1,7 +1,9 @@
 package com.example.lennox.flexture;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,9 +12,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.IOException;
 
@@ -23,8 +32,10 @@ public class Login extends AppCompatActivity {
     private TextView createAccount, resetPassword;
     private EditText et_userName, et_Password;
     private ArrayAdapter<CharSequence> adapter;
-    private String userName, password;
+    private String email, password;
     private Boolean studentSelected = true;
+    private FirebaseAuth studAuth, lecAuth;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +49,37 @@ public class Login extends AppCompatActivity {
         resetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // use an intent to open the email so that a user may send a message
-                Toast.makeText(getBaseContext(), "Check your email", Toast.LENGTH_SHORT).show();
+                if(email.equals("")){
+                    Toast.makeText(Login.this, "Please enter your email", Toast.LENGTH_SHORT).show();
+                }else{
+                    if(studentSelected){
+                        studAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    Toast.makeText(Login.this, "Password reset email sent!", Toast.LENGTH_SHORT).show();
+                                    resetPassword.setEnabled(false);
+                                }else{
+                                    Toast.makeText(Login.this, "Error occurred in sending reset email!", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });//from here
+                    }
+                    if(!studentSelected){
+                        lecAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    Toast.makeText(Login.this, "Password reset email sent!", Toast.LENGTH_SHORT).show();
+                                    resetPassword.setEnabled(false);
+                                }else{
+                                    Toast.makeText(Login.this, "Error occurred in sending reset email!", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });//from here
+                    }
+                }
+
             }
         });// not completed yet
 
@@ -78,33 +118,40 @@ public class Login extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mainPageIntent = new Intent(Login.this, Flexture.class);
+                final Intent mainPageIntent = new Intent(Login.this, Flexture.class);
 
-                if (studentSelected == true) {
-                    boolean pass;
-                    pass = validateStudent(userName, password);
-
-                    if (pass == true) {
-                        finish();
-                        mainPageIntent.putExtra("ROLE", studentSelected);
-                        mainPageIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); //prevents user from going back to previous screen
-                        startActivity(mainPageIntent);
-                    } else {
-                        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_SHORT).show();
-                    }
+                if (studentSelected) {
+                    progressBar.setVisibility(View.VISIBLE);
+                    studAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()){
+                                progressBar.setVisibility(View.GONE);
+                                finish();
+                                checkEmailVerification();
+                            }else {
+                                progressBar.setVisibility(View.GONE);
+                                Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }
 
-                if (studentSelected == false) {
-                    boolean pass = validateLecturer(userName, password);
-
-                    if (pass == true) {
-                        finish();
-                        mainPageIntent.putExtra("ROLE", studentSelected);
-                        mainPageIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); //prevents user from going back to previous screen
-                        startActivity(mainPageIntent);
-                    } else {
-                        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_SHORT).show();
-                    }
+                if (!studentSelected) {
+                    progressBar.setVisibility(View.VISIBLE);
+                    studAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()){
+                                progressBar.setVisibility(View.GONE);
+                                finish();
+                                checkEmailVerification();
+                            }else {
+                                progressBar.setVisibility(View.GONE);
+                                Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }
             }
         });
@@ -112,16 +159,6 @@ public class Login extends AppCompatActivity {
         et_userName.addTextChangedListener(loginTextWatcher);
         et_Password.addTextChangedListener(loginTextWatcher);
     }
-
-    private boolean validateLecturer(String userName, String password) {
-        //check for credentials first
-        return true;
-    }//incomplete
-
-    private boolean validateStudent(String userName, String password) {
-        //check for credentials first
-        return true;
-    }//incomplete
 
     private TextWatcher loginTextWatcher = new TextWatcher() {
         @Override
@@ -134,7 +171,7 @@ public class Login extends AppCompatActivity {
             String un = et_userName.getText().toString().trim();
             String pwd = et_Password.getText().toString().trim();
 
-            userName = un;
+            email = un;
             password = pwd;
 
             if (un != null && pwd != null)
@@ -160,6 +197,53 @@ public class Login extends AppCompatActivity {
         et_Password = (EditText) findViewById(R.id.password);
         createAccount = (TextView) findViewById(R.id.create_account);
         adapter = ArrayAdapter.createFromResource(this, R.array.roles, android.R.layout.simple_spinner_item);
-
+        progressBar = new ProgressBar(this);
+        progressBar.setVisibility(View.GONE);
+        //if user is currently logged in there is no need for validation
+        if(studentSelected){
+            studAuth = FirebaseAuth.getInstance();
+            FirebaseUser student = studAuth.getCurrentUser();
+            if(student != null){
+                finish();
+                startActivity(new Intent (this, Flexture.class).putExtra("ROLE", studentSelected));
+            }
+        }
+        if(!studentSelected){
+            lecAuth = FirebaseAuth.getInstance();
+            FirebaseUser lecturer = lecAuth.getCurrentUser();
+            if(lecturer != null){
+                finish();
+                startActivity(new Intent (this, Flexture.class).putExtra("ROLE", studentSelected));
+            }
+        }
     }
+
+    private void checkEmailVerification(){
+        if(studentSelected){
+            FirebaseUser firebaseUser = studAuth.getCurrentUser();
+            Boolean emailFlag = firebaseUser.isEmailVerified();
+
+            if(emailFlag){
+                finish();
+                startActivity(new Intent (this, Flexture.class).putExtra("ROLE", studentSelected));
+            }else{
+                Toast.makeText(this, "verify your email", Toast.LENGTH_SHORT).show();
+                studAuth.signOut();
+            }
+        }
+
+        if(!studentSelected){
+            FirebaseUser firebaseUser = lecAuth.getCurrentUser();
+            Boolean emailFlag = firebaseUser.isEmailVerified();
+
+            if(emailFlag){
+                finish();
+                startActivity(new Intent (this, Flexture.class).putExtra("ROLE", studentSelected));
+            }else{
+                Toast.makeText(this, "verify your email", Toast.LENGTH_SHORT).show();
+                lecAuth.signOut();
+            }
+        }
+    }
+
 }

@@ -18,7 +18,7 @@
         <item
             android:id="@+id/logout"
             android:orderInCategory="3"
-            app:showAsAction="never"
+            app:showAsAction="ifRoom"
             android:title="Logout" />
 
 </menu>

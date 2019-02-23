@@ -126,7 +126,7 @@ public class Registration extends AppCompatActivity {
             Toast.makeText(this, "Error, check your input", Toast.LENGTH_SHORT).show();
         }
         else {
-            if (studentSelected == true) {
+            if (studentSelected) {
                 studAuth.createUserWithEmailAndPassword(emailAddress, mainPwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -135,7 +135,8 @@ public class Registration extends AppCompatActivity {
                             sendStudentData();
                             Toast.makeText(getBaseContext(), " Registration Successful!", Toast.LENGTH_SHORT).show();
                             finish();
-                            startActivity(new Intent(Registration.this, Flexture.class).putExtra("ROLE", studentSelected));
+                            startActivity(new Intent(Registration.this, Login.class));
+                            studAuth.signOut();
                         }
                         else {
                             Toast.makeText(getBaseContext(), " Registration failed, try again!", Toast.LENGTH_SHORT).show();
@@ -143,7 +144,7 @@ public class Registration extends AppCompatActivity {
                     }
                 });
             }
-            if (studentSelected == false) {
+            if (!studentSelected) {
                 lecAuth.createUserWithEmailAndPassword(emailAddress, mainPwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -152,10 +153,11 @@ public class Registration extends AppCompatActivity {
                             sendLecturerData();
                             Toast.makeText(getBaseContext(), " Registration Successful!", Toast.LENGTH_SHORT).show();
                             finish();
-                            startActivity(new Intent(Registration.this, Flexture.class).putExtra("ROLE", studentSelected));
+                            startActivity(new Intent(Registration.this, Login.class));
+                            lecAuth.signOut();
                         }
                         else {
-                            Toast.makeText(getBaseContext(), " Registration failed, try again!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getBaseContext(), " Email address already exists!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -174,7 +176,7 @@ public class Registration extends AppCompatActivity {
             et_lName.setError("Invalid name");
             valid = false;
         }
-        if (studentSelected == true) {
+        if (studentSelected) {
             if (regNum.isEmpty() || checkReg(regNum)) {
                 et_regNumber.setError("Invalid registration number");
                 valid = false;
@@ -269,9 +271,9 @@ public class Registration extends AppCompatActivity {
 
     private void sendStudentData() {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = firebaseDatabase.getReference().child("Students");
+        DatabaseReference myRef = firebaseDatabase.getReference();
         UserProfile userProfile = new UserProfile(fName, lName, regNum, emailAddress, fonNumber);
-        myRef.push().setValue(userProfile);
+        myRef.child("Students").child(studAuth.getUid()).setValue(userProfile);
     }
 
     private void sendLecturerData() {

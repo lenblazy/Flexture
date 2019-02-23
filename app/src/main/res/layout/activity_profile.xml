@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:layout_below="@id/topSection"
-            android:text="Please Select your options correctly"
+            android:text="Select your options"
             android:layout_marginBottom="6dp"
             android:textColor="@android:color/white"/>
 

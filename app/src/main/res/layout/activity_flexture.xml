@@ -1,49 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorSecondary">
 
-    <RelativeLayout
-        android:id="@+id/topSpace"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:paddingBottom="5dp">
-        <ImageView
-            android:id="@+id/prof_pic"
-            android:layout_width="110sp"
-            android:layout_height="110sp"
-            android:src="@drawable/ic_user"
-            android:scaleType="centerCrop"
-            android:layout_alignParentStart="true"/>
-        <TextView
-            android:id="@+id/user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/prof_pic"
-            android:textSize="20sp"
-            android:paddingTop="10dp"
-            android:text="Name"
-            android:textColor="@android:color/black"
-            android:layout_marginStart="10dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/prof_pic"
-            android:layout_below="@id/user_name"
-            android:layout_marginBottom="5dp"
-            android:text="Welcome to flexture..."
-            android:textSize="15sp"
-            android:layout_marginStart="10dp"/>
-    </RelativeLayout>
-
     <GridView
         android:id="@+id/grid"
         android:layout_alignParentBottom="true"
-        android:layout_below="@id/topSpace"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:numColumns="2"

@@ -18,7 +18,6 @@ public class About extends AppCompatActivity {
         setContentView(R.layout.activity_about);
         moveViewToScreenCenter(findViewById(R.id.dev_header));
         moveViewToScreenCenter(findViewById(R.id.author1));
-        moveViewToScreenCenter(findViewById(R.id.author2));
         moveIcon(findViewById(R.id.imageViewAbout));
     }
 

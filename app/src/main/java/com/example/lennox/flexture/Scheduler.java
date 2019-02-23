@@ -18,7 +18,6 @@ import java.util.List;
 public class Scheduler extends AppCompatActivity {
 
     TableLayout table_classes;
-    DBHandler scheduleDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +28,6 @@ public class Scheduler extends AppCompatActivity {
 
     private void init() {
         table_classes = findViewById(R.id.title_classes);
-        scheduleDB = new DBHandler(this);
     }
 
     @Override
@@ -41,14 +39,14 @@ public class Scheduler extends AppCompatActivity {
 
         //true value for students and false value for lecturers
         if (role) {
-            addStudentData(table_classes);
+           // addStudentData(table_classes);
         } else {
-            addLecturerData(table_classes);
+           // addLecturerData(table_classes);
         }
     }
 
     private void addLecturerData(TableLayout table) {
-        List<Classes> classes = scheduleDB.getClasses(this);
+        List<Classes> classes = null;
 
         TableRow tr = new TableRow(this);
         tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
@@ -92,7 +90,7 @@ public class Scheduler extends AppCompatActivity {
     }
 
     private void addStudentData(TableLayout table) {
-        List<Classes> classes = scheduleDB.getClasses(this);
+        List<Classes> classes =null;
 
         TableRow tr = new TableRow(this);
         tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));

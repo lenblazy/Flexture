@@ -126,38 +126,40 @@ public class Registration extends AppCompatActivity {
             Toast.makeText(this, "Error, check your input", Toast.LENGTH_SHORT).show();
         }
         else {
-            if (studentSelected) {
+            if (studentSelected == true) {
                 studAuth.createUserWithEmailAndPassword(emailAddress, mainPwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             //sendEmailVerification();
-                            sendStudentData();
-                            Toast.makeText(getBaseContext(), " Registration Successful!", Toast.LENGTH_SHORT).show();
+                            sendStudentData(studAuth.getUid());
+                            Toast.makeText(getBaseContext(), "Registration Successful!", Toast.LENGTH_SHORT).show();
                             finish();
-                            startActivity(new Intent(Registration.this, Login.class));
-                            studAuth.signOut();
+                            startActivity(new Intent(Registration.this, Flexture.class).putExtra("ROLE", studentSelected));
                         }
                         else {
-                            Toast.makeText(getBaseContext(), " Registration failed, try again!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getBaseContext(), "Email address already exists!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
             }
-            if (!studentSelected) {
+            if (studentSelected == false) {
                 lecAuth.createUserWithEmailAndPassword(emailAddress, mainPwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             //sendEmailVerification();
-                            sendLecturerData();
-                            Toast.makeText(getBaseContext(), " Registration Successful!", Toast.LENGTH_SHORT).show();
+                            sendLecturerData(lecAuth.getUid());
+                            Toast.makeText(getBaseContext(), "Registration Successful!", Toast.LENGTH_SHORT).show();
                             finish();
-                            startActivity(new Intent(Registration.this, Login.class));
-                            lecAuth.signOut();
+                            startActivity(new Intent(Registration.this, Flexture.class).putExtra("ROLE", studentSelected));
                         }
                         else {
-                            Toast.makeText(getBaseContext(), " Email address already exists!", Toast.LENGTH_SHORT).show();
+<<<<<<< HEAD
+                            Toast.makeText(getBaseContext(), "Email address already exists!", Toast.LENGTH_SHORT).show();
+=======
+                            Toast.makeText(getBaseContext(), " Registration failed, try again!", Toast.LENGTH_SHORT).show();
+>>>>>>> parent of 4283dea... Remove the top UI from the flexture page and tried to retrieve data from firebase and paste on profile page. but the details get lost when i try to do it
                         }
                     }
                 });
@@ -176,7 +178,7 @@ public class Registration extends AppCompatActivity {
             et_lName.setError("Invalid name");
             valid = false;
         }
-        if (studentSelected) {
+        if (studentSelected == true) {
             if (regNum.isEmpty() || checkReg(regNum)) {
                 et_regNumber.setError("Invalid registration number");
                 valid = false;
@@ -211,14 +213,14 @@ public class Registration extends AppCompatActivity {
         }
     }
 
-    private Boolean checkFon(String fonNumber) {
+    private boolean checkFon(String fonNumber) {
         if (fonNumber.matches("[0][7]\\d{6}")) {
             return true;
         }
         return false;
     }//incomplete till only ten digits allowed
 
-    private Boolean checkReg(String regNum) {
+    private boolean checkReg(String regNum) {
         Pattern p = Pattern.compile("[a-zA-Z]+[a-zA-Z]+[a-zA-Z]/d{4}/d{2}");
         Matcher m = p.matcher(regNum);
         if (m.find() && m.group().equals(regNum)) {
@@ -253,10 +255,10 @@ public class Registration extends AppCompatActivity {
                     if (task.isSuccessful()){
                         Toast.makeText(Registration.this,"Verification email sent", Toast.LENGTH_SHORT).show();
                         if (studentSelected){
-                            sendStudentData();
+                            sendStudentData(studAuth.getUid());
                             studAuth.signOut();
                         }else{
-                            sendLecturerData();
+                            sendLecturerData(lecAuth.getUid());
                             lecAuth.signOut();
                         }
                         finish();
@@ -269,16 +271,18 @@ public class Registration extends AppCompatActivity {
         }
     }
 
-    private void sendStudentData() {
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = firebaseDatabase.getReference();
+    private void sendStudentData(String auth) {
+        /*DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("Students");
         UserProfile userProfile = new UserProfile(fName, lName, regNum, emailAddress, fonNumber);
-        myRef.child("Students").child(studAuth.getUid()).setValue(userProfile);
+        myRef.push().setValue(userProfile); */
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = firebaseDatabase.getReference().child("Students");
+        UserProfile userProfile = new UserProfile(fName, lName, regNum, emailAddress, fonNumber);
+        myRef.push().setValue(userProfile);
     }
 
-    private void sendLecturerData() {
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = firebaseDatabase.getReference().child("Lecturers");
+    private void sendLecturerData(String auth) {
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("Lecturers").child(auth);
         UserProfile userProfile = new UserProfile(fName, lName, emailAddress, fonNumber);
         myRef.push().setValue(userProfile);
     }

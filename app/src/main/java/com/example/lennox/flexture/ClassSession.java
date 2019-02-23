@@ -1,6 +1,5 @@
 package com.example.lennox.flexture;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -15,7 +14,7 @@ import android.widget.TextView;
 
 public class ClassSession extends AppCompatActivity {
 
-    private Button start, stop, send;
+    private Button start, send;
     private TextView timeRem, totalStud, onlineStud;
     private ListView questions;
     private EditText query;
@@ -29,7 +28,6 @@ public class ClassSession extends AppCompatActivity {
 
     private void init() {
         start = findViewById(R.id.start);
-        stop = findViewById(R.id.stop);
         send = findViewById(R.id.send_button);
         timeRem = findViewById(R.id.time_rem);
         totalStud = findViewById(R.id.stud_registered);
@@ -42,8 +40,10 @@ public class ClassSession extends AppCompatActivity {
 
         //true value for students and false value for lecturers
         if (role) {
+            start.setText(R.string.join);
             studentActivities();
         } else {
+            start.setText(R.string.start);
             lecturerActivities();
         }
 
@@ -56,18 +56,14 @@ public class ClassSession extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                start.setEnabled(false);
-                stop.setEnabled(true);
-                //to start the session
-            }
-        });
 
-        stop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                stop.setEnabled(false);
-                start.setEnabled(true);
-                //to end the session
+                if(start.getText().toString().equals("Start")){
+                    //to start the session
+                    start.setText(R.string.stop);
+                }else{
+                    //to stop the session
+                    start.setText(R.string.start);
+                }
             }
         });
 
@@ -77,19 +73,24 @@ public class ClassSession extends AppCompatActivity {
     }
 
     private void studentActivities() {
-        stop.setVisibility(View.GONE);
-        start.setText("Join Class");
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 query.setEnabled(true);
                 //get the time remaining for the class session and display it on textview
+                //get current time from calender or firebase db and compare it to schedule
                 //to join the session
+                if(start.getText().toString().equals("Join Class")){
+                    //to start the session
+                    start.setText(R.string.leave);
+                }else{
+                    //to stop the session
+                    start.setText(R.string.join);
+                }
             }
         });
 
         query.addTextChangedListener(queryTextWatcher);
-
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

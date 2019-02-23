@@ -15,8 +15,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class GridAdapter extends BaseAdapter{
-    ArrayList names;
-    public static Activity activity;
+    private ArrayList names;
+    private Activity activity;
     private Boolean studentSelected;
 
     public GridAdapter(Activity activity, ArrayList names, Boolean role) {
@@ -48,6 +48,7 @@ public class GridAdapter extends BaseAdapter{
         }
         TextView textView = (TextView)view.findViewById(R.id.namePlacer);
         ImageView imageView = (ImageView)view.findViewById(R.id.imageHolder);
+
         if(names.get(i).toString().equals("CLASS SESSION")) {
             imageView.setImageResource(R.drawable.ic_attendance);
             view.setOnClickListener(new View.OnClickListener() {
@@ -141,7 +142,8 @@ public class GridAdapter extends BaseAdapter{
                 @Override
                 public void onClick(View v) {
                    Intent profile = new Intent(activity, Profile.class);
-                    activity.startActivity(profile);
+                   profile.putExtra("ROLE", studentSelected);
+                   activity.startActivity(profile);
                 }
             });
             Animation anim = new ScaleAnimation(

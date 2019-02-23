@@ -37,6 +37,7 @@ public class Notes extends AppCompatActivity {
         btnUploadFile.setVisibility(View.GONE);
         tvSubInstr.setVisibility(View.GONE);
         // not needed by lecturer
+        // to add a notes adapter
 
     }
 
@@ -46,6 +47,7 @@ public class Notes extends AppCompatActivity {
         tvFilessubmitted.setVisibility(View.GONE);
         tvCourseStudents.setVisibility(View.GONE);
         // not needed by student
+        // to add a notes adapter class
 
 
     }

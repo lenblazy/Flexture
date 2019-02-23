@@ -10,6 +10,17 @@
     <string name="action_refresh">Refresh</string>
     <string name="action_pwd">Change password</string>
     <string name="author1">Lennox Brown Mwabonje</string>
-    <string name="author2">Emmanuel Saha Mwinga</string>
+
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="list_title">Questions Posted</string>
+    <string name="reg_stud">Registered students: </string>
+    <string name="initial">0</string>
+    <string name="stud_att">Students attendance: </string>
+    <string name="send">Send</string>
+    <string name="duration">Time Remaining:"</string>
+    <string name="question">Post a Question</string>
+    <string name="join">Join Class</string>
+    <string name="leave">Leave Class</string>
 
 </resources>

@@ -2,31 +2,27 @@ package com.example.lennox.flexture;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class Flexture extends AppCompatActivity {
 
+<<<<<<< HEAD
     private ArrayList<String> fields;
-    private GridView gridview;
-    private GridAdapter adapter;
+    public Activity activity;
+=======
+    ArrayList<String> fields;
+    GridView gridview;
+    GridAdapter adapter;
     public static Activity activity;
+>>>>>>> parent of 4283dea... Remove the top UI from the flexture page and tried to retrieve data from firebase and paste on profile page. but the details get lost when i try to do it
     private FirebaseAuth mAuth;
 
     @Override
@@ -57,8 +53,8 @@ public class Flexture extends AppCompatActivity {
             lecturerActivities();
         }
 
-        gridview = findViewById(R.id.grid);
-        adapter = new GridAdapter(this, fields, role);
+        GridView gridview = findViewById(R.id.grid);
+        GridAdapter adapter = new GridAdapter(this, fields, role);
         gridview.setAdapter(adapter);
     }
 
@@ -82,17 +78,15 @@ public class Flexture extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.settings:
-                //open settings page
+                startActivity(new Intent(this, Settings.class));
                 return true;
             case R.id.about:
-                Intent about = new Intent(this, About.class);
-                startActivity(about);
+                startActivity(new Intent(this, About.class));
                 return true;
             case R.id.logout:
-                Intent logout = new Intent(this, Login.class);
                 mAuth.signOut();
                 finish();
-                startActivity(logout);
+                startActivity(new Intent(this, Login.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

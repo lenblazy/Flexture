@@ -46,33 +46,34 @@ public class Login extends AppCompatActivity {
     }
 
     private void listeners() {
+
         resetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(email.equals("")){
+                if (email.equals("")) {
                     Toast.makeText(Login.this, "Please enter your email", Toast.LENGTH_SHORT).show();
-                }else{
-                    if(studentSelected){
+                } else {
+                    if (studentSelected) {
                         studAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     Toast.makeText(Login.this, "Password reset email sent!", Toast.LENGTH_SHORT).show();
                                     resetPassword.setEnabled(false);
-                                }else{
+                                } else {
                                     Toast.makeText(Login.this, "Error occurred in sending reset email!", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });//from here
                     }
-                    if(!studentSelected){
+                    if (!studentSelected) {
                         lecAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     Toast.makeText(Login.this, "Password reset email sent!", Toast.LENGTH_SHORT).show();
                                     resetPassword.setEnabled(false);
-                                }else{
+                                } else {
                                     Toast.makeText(Login.this, "Error occurred in sending reset email!", Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -109,6 +110,7 @@ public class Login extends AppCompatActivity {
                         break;
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
@@ -118,18 +120,17 @@ public class Login extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Intent mainPageIntent = new Intent(Login.this, Flexture.class);
-
                 if (studentSelected) {
                     progressBar.setVisibility(View.VISIBLE);
                     studAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 progressBar.setVisibility(View.GONE);
                                 finish();
-                                checkEmailVerification();
-                            }else {
+                                //checkEmailVerification();
+                                loginWithoutVerification();
+                            } else {
                                 progressBar.setVisibility(View.GONE);
                                 Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_SHORT).show();
                             }
@@ -142,11 +143,12 @@ public class Login extends AppCompatActivity {
                     studAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 progressBar.setVisibility(View.GONE);
                                 finish();
-                                checkEmailVerification();
-                            }else {
+                                //checkEmailVerification();
+                                loginWithoutVerification();
+                            } else {
                                 progressBar.setVisibility(View.GONE);
                                 Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_SHORT).show();
                             }
@@ -200,49 +202,61 @@ public class Login extends AppCompatActivity {
         progressBar = new ProgressBar(this);
         progressBar.setVisibility(View.GONE);
         //if user is currently logged in there is no need for validation
-        if(studentSelected){
+        if (studentSelected) {
             studAuth = FirebaseAuth.getInstance();
             FirebaseUser student = studAuth.getCurrentUser();
-            if(student != null){
+            if (student != null) {
                 finish();
-                startActivity(new Intent (this, Flexture.class).putExtra("ROLE", studentSelected));
+                startActivity(new Intent(this, Flexture.class).putExtra("ROLE", studentSelected));
             }
         }
-        if(!studentSelected){
+        if (!studentSelected) {
             lecAuth = FirebaseAuth.getInstance();
             FirebaseUser lecturer = lecAuth.getCurrentUser();
-            if(lecturer != null){
+            if (lecturer != null) {
                 finish();
-                startActivity(new Intent (this, Flexture.class).putExtra("ROLE", studentSelected));
+                startActivity(new Intent(this, Flexture.class).putExtra("ROLE", studentSelected));
             }
         }
     }
 
-    private void checkEmailVerification(){
-        if(studentSelected){
+    private void checkEmailVerification() {
+        if (studentSelected) {
             FirebaseUser firebaseUser = studAuth.getCurrentUser();
             Boolean emailFlag = firebaseUser.isEmailVerified();
 
-            if(emailFlag){
+            if (emailFlag) {
                 finish();
-                startActivity(new Intent (this, Flexture.class).putExtra("ROLE", studentSelected));
-            }else{
+                startActivity(new Intent(this, Flexture.class).putExtra("ROLE", studentSelected));
+            } else {
                 Toast.makeText(this, "verify your email", Toast.LENGTH_SHORT).show();
                 studAuth.signOut();
             }
         }
 
-        if(!studentSelected){
+        if (!studentSelected) {
             FirebaseUser firebaseUser = lecAuth.getCurrentUser();
             Boolean emailFlag = firebaseUser.isEmailVerified();
 
-            if(emailFlag){
+            if (emailFlag) {
                 finish();
-                startActivity(new Intent (this, Flexture.class).putExtra("ROLE", studentSelected));
-            }else{
+                startActivity(new Intent(this, Flexture.class).putExtra("ROLE", studentSelected));
+            } else {
                 Toast.makeText(this, "verify your email", Toast.LENGTH_SHORT).show();
                 lecAuth.signOut();
             }
+        }
+    }
+
+    private void loginWithoutVerification() {
+        if (studentSelected) {
+            finish();
+            startActivity(new Intent(this, Flexture.class).putExtra("ROLE", studentSelected));
+        }
+
+        if (!studentSelected) {
+            finish();
+            startActivity(new Intent(this, Flexture.class).putExtra("ROLE", studentSelected));
         }
     }
 

@@ -41,9 +41,14 @@
             android:name=".Notes"
             android:parentActivityName=".Flexture"
             android:theme="@style/myStyle" />
-        <activity android:name=".Results"
+        <activity
+            android:name=".Results"
             android:parentActivityName=".Flexture"
-            android:theme="@style/myStyle"></activity>
+            android:theme="@style/myStyle" />
+        <activity android:name=".Settings"
+            android:parentActivityName=".Flexture"
+            android:theme="@style/myStyle">
+        </activity>
     </application>
 
 </manifest>

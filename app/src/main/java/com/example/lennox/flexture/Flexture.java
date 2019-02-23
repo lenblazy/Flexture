@@ -15,9 +15,12 @@ import java.util.ArrayList;
 public class Flexture extends AppCompatActivity {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     private ArrayList<String> fields;
     public Activity activity;
 =======
+=======
+>>>>>>> parent of 4283dea... Remove the top UI from the flexture page and tried to retrieve data from firebase and paste on profile page. but the details get lost when i try to do it
     ArrayList<String> fields;
     GridView gridview;
     GridAdapter adapter;

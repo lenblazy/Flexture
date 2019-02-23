@@ -21,8 +21,11 @@ public class Profile extends AppCompatActivity {
     Spinner spFaculty, spDept, spLevel, spProg, spYear, spSemester;
     ListView lvCourses;
 <<<<<<< HEAD
+<<<<<<< HEAD
     TextView tvFName, tvLName, tvRegNum, tvFonNum, tvEmail;
     ImageView profilePic;
+=======
+>>>>>>> parent of 4283dea... Remove the top UI from the flexture page and tried to retrieve data from firebase and paste on profile page. but the details get lost when i try to do it
 =======
 >>>>>>> parent of 4283dea... Remove the top UI from the flexture page and tried to retrieve data from firebase and paste on profile page. but the details get lost when i try to do it
 
@@ -32,6 +35,7 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         init();
         listeners();
+<<<<<<< HEAD
 <<<<<<< HEAD
 
         //check the role
@@ -87,6 +91,8 @@ public class Profile extends AppCompatActivity {
                 Toast.makeText(Profile.this,"Failed", Toast.LENGTH_SHORT).show();
             }
         });
+=======
+>>>>>>> parent of 4283dea... Remove the top UI from the flexture page and tried to retrieve data from firebase and paste on profile page. but the details get lost when i try to do it
 =======
 >>>>>>> parent of 4283dea... Remove the top UI from the flexture page and tried to retrieve data from firebase and paste on profile page. but the details get lost when i try to do it
     }

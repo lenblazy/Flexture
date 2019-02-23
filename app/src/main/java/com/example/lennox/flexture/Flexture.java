@@ -8,8 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
 
-import com.google.firebase.auth.FirebaseAuth;
-
 import java.util.ArrayList;
 
 public class Flexture extends AppCompatActivity {
@@ -25,8 +23,11 @@ public class Flexture extends AppCompatActivity {
     GridView gridview;
     GridAdapter adapter;
     public static Activity activity;
+<<<<<<< HEAD
 >>>>>>> parent of 4283dea... Remove the top UI from the flexture page and tried to retrieve data from firebase and paste on profile page. but the details get lost when i try to do it
     private FirebaseAuth mAuth;
+=======
+>>>>>>> parent of 95dc3c3... Able to send data successfully to firebase
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -44,7 +45,6 @@ public class Flexture extends AppCompatActivity {
     private void init() {
         activity = this;
         fields = new ArrayList<>();
-        mAuth = FirebaseAuth.getInstance();
 
         //check the role
         Boolean role = getIntent().getBooleanExtra("ROLE", true);
@@ -87,9 +87,17 @@ public class Flexture extends AppCompatActivity {
                 startActivity(new Intent(this, About.class));
                 return true;
             case R.id.logout:
+<<<<<<< HEAD
                 mAuth.signOut();
                 finish();
                 startActivity(new Intent(this, Login.class));
+=======
+                //logout user from system, not yet complete
+                Intent logout = new Intent(this, Login.class);
+                finish();
+                logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); //prevents user from going back to previous screen
+                startActivity(logout);
+>>>>>>> parent of 95dc3c3... Able to send data successfully to firebase
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

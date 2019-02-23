@@ -1,13 +1,11 @@
 package com.example.lennox.flexture;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,17 +15,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,13 +22,11 @@ public class Registration extends AppCompatActivity {
 
     private Button submitRegistration;
     private EditText et_fName, et_lName, et_regNumber, et_mainPass, et_sidePass, et_emailAddr, et_fonNum;
-    private static String fName, lName, regNum, mainPwd, sidePwd, emailAddress, fonNumber;
+    public String fName, lName, regNum, mainPwd, sidePwd, emailAddress, fonNumber;
     private Boolean studentSelected;
     private Spinner regSpinner;
     private ArrayAdapter<CharSequence> adapter;
     private TextInputLayout regInput;
-    private FirebaseAuth studAuth;
-    private FirebaseAuth lecAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,11 +107,14 @@ public class Registration extends AppCompatActivity {
     };
 
     private void register() {
+        Intent flexture = new Intent(Registration.this, Flexture.class);
+
         if (!validate()) {
-            Toast.makeText(this, "Error, check your input", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Registration has failed", Toast.LENGTH_SHORT).show();
         }
         else {
             if (studentSelected == true) {
+<<<<<<< HEAD
                 studAuth.createUserWithEmailAndPassword(emailAddress, mainPwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -167,9 +155,35 @@ public class Registration extends AppCompatActivity {
                         }
                     }
                 });
+=======
+                boolean regSuccess = true;
+                //save the reg details in firebase
+                if (regSuccess == true) {
+                    finish();
+                    Toast.makeText(getBaseContext(), " Successful registration", Toast.LENGTH_SHORT).show();
+                    flexture.putExtra("ROLE", studentSelected);
+                    flexture.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); //prevents user from going back to previous screen
+                    startActivity(flexture);
+                } else {
+                    Toast.makeText(getBaseContext(), " Registration not successful, try again!", Toast.LENGTH_SHORT).show();
+                }
+            }
+            if (studentSelected == false) {
+                boolean regSuccess = true;
+                //save the reg details in firebase
+                if (regSuccess == true) {
+                    finish();
+                    Toast.makeText(getBaseContext(), " Successful registration", Toast.LENGTH_SHORT).show();
+                    flexture.putExtra("ROLE", studentSelected);
+                    flexture.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); //prevents user from going back to previous screen
+                    startActivity(flexture);
+                } else {
+                    Toast.makeText(getBaseContext(), " Registration not successful, try again!", Toast.LENGTH_SHORT).show();
+                }
+>>>>>>> parent of 95dc3c3... Able to send data successfully to firebase
             }
         }
-    }
+    }// incomplete till you connect to firebase
 
     private boolean validate() {
         boolean valid = true;
@@ -245,6 +259,7 @@ public class Registration extends AppCompatActivity {
         submitRegistration = (Button) findViewById(R.id.register_button);
         regSpinner = (Spinner) findViewById(R.id.reg_selector);
         regInput = findViewById(R.id.reg_input);
+<<<<<<< HEAD
         studAuth = FirebaseAuth.getInstance();
         lecAuth = FirebaseAuth.getInstance();
 
@@ -290,4 +305,13 @@ public class Registration extends AppCompatActivity {
         UserProfile userProfile = new UserProfile(fName, lName, emailAddress, fonNumber);
         myRef.push().setValue(userProfile);
     }
+=======
+        Boolean studentSelected = getIntent().getBooleanExtra("ROLE", true);
+        if (studentSelected) {
+            //set the selected text to be student
+        } else {
+            //set default value to be lecturer
+        }
+    }
+>>>>>>> parent of 95dc3c3... Able to send data successfully to firebase
 }

@@ -157,7 +157,11 @@ public class Registration extends AppCompatActivity {
                         else {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                             Toast.makeText(getBaseContext(), "Email address already exists!", Toast.LENGTH_SHORT).show();
+=======
+                            Toast.makeText(getBaseContext(), " Registration failed, try again!", Toast.LENGTH_SHORT).show();
+>>>>>>> parent of 4283dea... Remove the top UI from the flexture page and tried to retrieve data from firebase and paste on profile page. but the details get lost when i try to do it
 =======
                             Toast.makeText(getBaseContext(), " Registration failed, try again!", Toast.LENGTH_SHORT).show();
 >>>>>>> parent of 4283dea... Remove the top UI from the flexture page and tried to retrieve data from firebase and paste on profile page. but the details get lost when i try to do it

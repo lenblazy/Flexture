@@ -7,6 +7,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
+<<<<<<< HEAD
+=======
+
+import com.google.firebase.auth.FirebaseAuth;
+>>>>>>> parent of 4283dea... Remove the top UI from the flexture page and tried to retrieve data from firebase and paste on profile page. but the details get lost when i try to do it
 
 import java.util.ArrayList;
 
@@ -14,9 +19,12 @@ public class Flexture extends AppCompatActivity {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     private ArrayList<String> fields;
     public Activity activity;
 =======
+=======
+>>>>>>> parent of 4283dea... Remove the top UI from the flexture page and tried to retrieve data from firebase and paste on profile page. but the details get lost when i try to do it
 =======
 >>>>>>> parent of 4283dea... Remove the top UI from the flexture page and tried to retrieve data from firebase and paste on profile page. but the details get lost when i try to do it
     ArrayList<String> fields;

@@ -5,6 +5,9 @@ public class UserProfile {
     private String firstName, lastName, regNumber, emailAddress, phoneNumber;
 =======
     public String firstName, lastName, regNumber, emailAddress, phoneNumber;
+<<<<<<< HEAD
+>>>>>>> parent of 4283dea... Remove the top UI from the flexture page and tried to retrieve data from firebase and paste on profile page. but the details get lost when i try to do it
+=======
 >>>>>>> parent of 4283dea... Remove the top UI from the flexture page and tried to retrieve data from firebase and paste on profile page. but the details get lost when i try to do it
 
     public UserProfile(String firstName, String lastName, String regNumber, String emailAddress, String phoneNumber) {

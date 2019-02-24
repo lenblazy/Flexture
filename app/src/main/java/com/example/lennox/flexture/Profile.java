@@ -52,6 +52,25 @@ public class Profile extends AppCompatActivity {
     }
 
     private void lecturerProfile() {
+        FirebaseAuth lecAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child("Lecturers").child(lecAuth.getUid());
+        ValueEventListener listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserProfile up = dataSnapshot.getValue(UserProfile.class);
+                fName.setText(up.getFirstName());
+                lName.setText(up.getLastName());
+                fonNum.setText(up.getPhoneNumber());
+                em.setText(up.getEmailAddress());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e(TAG, "loadPost:onCancelled", databaseError.toException());
+            }
+        };
+        databaseReference.addValueEventListener(listener);
     }
 
     private void studentProfile() {

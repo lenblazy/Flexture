@@ -23,8 +23,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.io.IOException;
-
 public class Login extends AppCompatActivity {
 
     private Button loginButton;
@@ -118,7 +116,6 @@ public class Login extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Intent mainPageIntent = new Intent(Login.this, Flexture.class);
 
                 if (studentSelected) {
                     progressBar.setVisibility(View.VISIBLE);
@@ -128,7 +125,8 @@ public class Login extends AppCompatActivity {
                             if (task.isSuccessful()){
                                 progressBar.setVisibility(View.GONE);
                                 finish();
-                                checkEmailVerification();
+                                //checkEmailVerification();
+                                startActivity(new Intent (Login.this, Flexture.class).putExtra("ROLE", studentSelected));
                             }else {
                                 progressBar.setVisibility(View.GONE);
                                 Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_SHORT).show();
@@ -145,7 +143,8 @@ public class Login extends AppCompatActivity {
                             if (task.isSuccessful()){
                                 progressBar.setVisibility(View.GONE);
                                 finish();
-                                checkEmailVerification();
+                                //checkEmailVerification();
+                                startActivity(new Intent (Login.this, Flexture.class).putExtra("ROLE", studentSelected));
                             }else {
                                 progressBar.setVisibility(View.GONE);
                                 Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_SHORT).show();
@@ -199,6 +198,7 @@ public class Login extends AppCompatActivity {
         adapter = ArrayAdapter.createFromResource(this, R.array.roles, android.R.layout.simple_spinner_item);
         progressBar = new ProgressBar(this);
         progressBar.setVisibility(View.GONE);
+
         //if user is currently logged in there is no need for validation
         if(studentSelected){
             studAuth = FirebaseAuth.getInstance();

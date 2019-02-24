@@ -201,7 +201,7 @@ public class Registration extends AppCompatActivity {
     private boolean checkName(String name) {
         Pattern p = Pattern.compile("[a-zA-Z]+");
         Matcher m = p.matcher(name);
-        return m.find() && m.group().equals(name);
+        return !(m.find() && m.group().equals(name));
     }
 
     private Boolean checkFon(String fonNumber) {
@@ -211,7 +211,7 @@ public class Registration extends AppCompatActivity {
     private Boolean checkReg(String regNum) {
         Pattern p = Pattern.compile("[a-zA-Z]+[a-zA-Z]+[a-zA-Z]/d{4}/d{2}");
         Matcher m = p.matcher(regNum);
-        return m.find() && m.group().equals(regNum);
+        return !(m.find() && m.group().equals(regNum));
     }// incomplete till the correct format is implemented
 
     private void init() {

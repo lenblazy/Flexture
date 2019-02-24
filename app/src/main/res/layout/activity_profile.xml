@@ -21,6 +21,13 @@
                 android:layout_height="140sp"
                 android:src="@drawable/ic_user" />
 
+            <ProgressBar
+                android:id="@+id/load_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_alignEnd="@id/display_photo"/>
+
             <TextView
                 android:id="@+id/fName"
                 android:layout_width="wrap_content"

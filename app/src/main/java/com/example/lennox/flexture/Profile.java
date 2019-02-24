@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ public class Profile extends AppCompatActivity {
     Spinner spFaculty, spDept, spLevel, spProg, spYear, spSemester;
     TextView fName ,lName, regNum, fonNum, em;
     private static final String TAG = Profile.class.getName();
+    ProgressBar detailsLoader;
 
 
     @Override
@@ -52,12 +54,14 @@ public class Profile extends AppCompatActivity {
     }
 
     private void lecturerProfile() {
+        regNum.setVisibility(View.GONE);
         FirebaseAuth lecAuth = FirebaseAuth.getInstance();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference().child("Lecturers").child(lecAuth.getUid());
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                detailsLoader.setVisibility(View.GONE);
                 UserProfile up = dataSnapshot.getValue(UserProfile.class);
                 fName.setText(up.getFirstName());
                 lName.setText(up.getLastName());
@@ -81,6 +85,7 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserProfile up = dataSnapshot.getValue(UserProfile.class);
+                detailsLoader.setVisibility(View.GONE);
                 fName.setText(up.getFirstName());
                 lName.setText(up.getLastName());
                 regNum.setText(up.getRegNumber());
@@ -115,6 +120,7 @@ public class Profile extends AppCompatActivity {
         spYear = findViewById(R.id.sp_year);
         spSemester = findViewById(R.id.sp_semester);
         ListView lvCourses = (ListView) findViewById(R.id.courses);
+        detailsLoader = (ProgressBar) findViewById(R.id.load_details);
 
         //textviews
         fName = findViewById(R.id.fName);

@@ -141,7 +141,8 @@ public class GridAdapter extends BaseAdapter{
                 @Override
                 public void onClick(View v) {
                    Intent profile = new Intent(activity, Profile.class);
-                    activity.startActivity(profile);
+                   profile.putExtra("ROLE", studentSelected);
+                   activity.startActivity(profile);
                 }
             });
             Animation anim = new ScaleAnimation(

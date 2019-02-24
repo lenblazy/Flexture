@@ -38,7 +38,6 @@ public class Registration extends AppCompatActivity {
     private static String fName, lName, regNum, mainPwd, sidePwd, emailAddress, fonNumber;
     private Boolean studentSelected;
     private Spinner regSpinner;
-    private ArrayAdapter<CharSequence> adapter;
     private TextInputLayout regInput;
     private FirebaseAuth studAuth;
     private FirebaseAuth lecAuth;
@@ -68,7 +67,7 @@ public class Registration extends AppCompatActivity {
         et_fonNum.addTextChangedListener(regWatcher);
 
         //spinner listener
-        adapter = ArrayAdapter.createFromResource(this, R.array.roles, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.roles, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         regSpinner.setAdapter(adapter);
@@ -126,13 +125,13 @@ public class Registration extends AppCompatActivity {
             Toast.makeText(this, "Error, check your input", Toast.LENGTH_SHORT).show();
         }
         else {
-            if (studentSelected == true) {
+            if (studentSelected) {
                 studAuth.createUserWithEmailAndPassword(emailAddress, mainPwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             //sendEmailVerification();
-                            sendStudentData();
+                            sendStudentData(studAuth.getUid());
                             Toast.makeText(getBaseContext(), " Registration Successful!", Toast.LENGTH_SHORT).show();
                             finish();
                             startActivity(new Intent(Registration.this, Flexture.class).putExtra("ROLE", studentSelected));
@@ -143,13 +142,13 @@ public class Registration extends AppCompatActivity {
                     }
                 });
             }
-            if (studentSelected == false) {
+            if (!studentSelected) {
                 lecAuth.createUserWithEmailAndPassword(emailAddress, mainPwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             //sendEmailVerification();
-                            sendLecturerData();
+                            sendLecturerData(lecAuth.getUid());
                             Toast.makeText(getBaseContext(), " Registration Successful!", Toast.LENGTH_SHORT).show();
                             finish();
                             startActivity(new Intent(Registration.this, Flexture.class).putExtra("ROLE", studentSelected));
@@ -174,7 +173,7 @@ public class Registration extends AppCompatActivity {
             et_lName.setError("Invalid name");
             valid = false;
         }
-        if (studentSelected == true) {
+        if (studentSelected) {
             if (regNum.isEmpty() || checkReg(regNum)) {
                 et_regNumber.setError("Invalid registration number");
                 valid = false;
@@ -202,28 +201,17 @@ public class Registration extends AppCompatActivity {
     private boolean checkName(String name) {
         Pattern p = Pattern.compile("[a-zA-Z]+");
         Matcher m = p.matcher(name);
-        if (m.find() && m.group().equals(name)) {
-            return false;
-        } else {
-            return true;
-        }
+        return m.find() && m.group().equals(name);
     }
 
     private Boolean checkFon(String fonNumber) {
-        if (fonNumber.matches("[0][7]\\d{6}")) {
-            return true;
-        }
-        return false;
+        return fonNumber.matches("[0][7]\\d{6}");
     }//incomplete till only ten digits allowed
 
     private Boolean checkReg(String regNum) {
         Pattern p = Pattern.compile("[a-zA-Z]+[a-zA-Z]+[a-zA-Z]/d{4}/d{2}");
         Matcher m = p.matcher(regNum);
-        if (m.find() && m.group().equals(regNum)) {
-            return true;
-        } else {
-            return false;
-        }
+        return m.find() && m.group().equals(regNum);
     }// incomplete till the correct format is implemented
 
     private void init() {
@@ -251,10 +239,10 @@ public class Registration extends AppCompatActivity {
                     if (task.isSuccessful()){
                         Toast.makeText(Registration.this,"Verification email sent", Toast.LENGTH_SHORT).show();
                         if (studentSelected){
-                            sendStudentData();
+                            sendStudentData(studAuth.getUid());
                             studAuth.signOut();
                         }else{
-                            sendLecturerData();
+                            sendLecturerData(lecAuth.getUid());
                             lecAuth.signOut();
                         }
                         finish();
@@ -267,17 +255,17 @@ public class Registration extends AppCompatActivity {
         }
     }
 
-    private void sendStudentData() {
+    private void sendStudentData(String uid) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = firebaseDatabase.getReference().child("Students");
+        DatabaseReference myRef = firebaseDatabase.getReference().child("Students").child(uid);
         UserProfile userProfile = new UserProfile(fName, lName, regNum, emailAddress, fonNumber);
-        myRef.push().setValue(userProfile);
+        myRef.setValue(userProfile);
     }
 
-    private void sendLecturerData() {
+    private void sendLecturerData(String uid) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = firebaseDatabase.getReference().child("Lecturers");
+        DatabaseReference myRef = firebaseDatabase.getReference().child("Lecturers").child(uid);
         UserProfile userProfile = new UserProfile(fName, lName, emailAddress, fonNumber);
-        myRef.push().setValue(userProfile);
+        myRef.setValue(userProfile);
     }
 }
